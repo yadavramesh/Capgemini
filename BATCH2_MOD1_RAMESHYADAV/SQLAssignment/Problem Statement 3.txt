@@ -1,0 +1,172 @@
+
+SQL> SELECT S.STAFF_NAME,
+  2    D.DEPT_CODE,
+  3    D.DEPT_NAME,
+  4    S.STAFF_SAL
+  5  FROM STAFF_MASTER S,
+  6    DEPARTMENT_MASTER D
+  7  WHERE S.DEPT_CODE=D.DEPT_CODE
+  8  AND STAFF_SAL    >20000;
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+SUPPORT                                                     1
+CEO                                                     50000
+
+SUPPORT                                                     1
+CEO                                                     50000
+
+SUPPORT                                                     1
+CEO                                                     50000
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+SUPPORT                                                     1
+CEO                                                     50000
+
+SUPPORT                                                     1
+CEO                                                     50000
+
+SUPPORT                                                     1
+CEO                                                     50000
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+SUPPORT                                                     1
+CEO                                                     50000
+
+
+7 rows selected.
+
+SQL> SELECT S.STAFF_CODE AS STAFF# ,
+  2    S.STAFF_NAME      AS STAFF,
+  3    D.DEPT_NAME,
+  4    S.MGR_CODE AS MGR#
+  5  FROM STAFF_MASTER S,
+  6    DEPARTMENT_MASTER D
+  7  WHERE S.DEPT_CODE=D.DEPT_CODE;
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+      1101 SUPPORT
+CEO
+
+      1102 SUPPORT
+CEO
+
+      1103 SUPPORT
+CEO
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+      1104 SUPPORT
+CEO
+
+      1105 SUPPORT
+CEO
+
+      1106 SUPPORT
+CEO
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+      1107 SUPPORT
+CEO
+
+
+7 rows selected.
+
+SQL> SELECT S.STUDENT_CODE,S.STUDENT_NAME,
+  2  B.BOOK_CODE,
+  3  BB.BOOK_NAME
+  4  FROM STUDENT_MASTER S,BOOK_TRANSACTIONS B, BOOK_MASTER BB
+  5  WHERE S.STUDENT_CODE=B.STUDENT_CODE AND TO_CHAR(B.BOOK_EXPECTED_RETURN_DATE,'DD MM YYYY')  LIKE TO_CHAR(SYSDATE,'DD MM YYYY');
+
+no rows selected
+
+
+SQL>  desc staff_master
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFF_CODE                                NOT NULL NUMBER(8)
+ STAFF_NAME                                NOT NULL VARCHAR2(50)
+ DESIGN_CODE                                        NUMBER
+ DEPT_CODE                                          NUMBER
+ HIREDATE                                           DATE
+ STAFF_DOB                                          DATE
+ STAFF_ADDRESS                                      VARCHAR2(240)
+ MGR_CODE                                           NUMBER(8)
+ STAFF_SAL                                          NUMBER(10,2)
+
+SQL>  desc department_master
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_CODE                                 NOT NULL NUMBER(2)
+ DEPT_NAME                                          VARCHAR2(50)
+
+SQL> SELECT Staff_Code, Staff_Name,STAFF_SAL
+  2  FROM STAFF_MASTER
+  3  WHERE STAFF_SAL<(SELECT AVG(STAFF_SAL) FROM STAFF_MASTER);
+
+no rows selected
+
+SQL> SELECT S.STAFF_CODE,S.STAFF_NAME,D.DEPT_NAME,F.DESIGN_NAME,G.BOOK_NAME,H.BOOK_ISSUE_DATE 
+  2	FROM STAFF_MASTER S,DEPARTMENT_MASTER D,DESIGNATION_MASTER F,BOOK_MASTER F,BOOK_ISSUE_DATE H 
+  3	WHERE MONTHS_BETWEEN(TO_CHAR(H.BOOK_ISSUE_DATE,'MM'),TO_CHAR(SYSDATE,'MM'))<1;
+ 
+
+no rows selected
+ 
+ 
+SQL> SELECT Staff_Code, Staff_Name,STAFF_SAL  
+  2	FROM STAFF_MASTER 
+  3	WHERE STAFF_SAL<(SELECT AVG(STAFF_SAL) FROM STAFF_MASTER);
+
+no rows selected
+
+SQL> SELECT Book_pub_author,BOOK_NAME 
+  2	FROM BOOK_MASTER 
+  3	GROUP BY book_pub_author 
+  4 	HAVING COUNT(book_pub_author)>1;
+  
+no rows selected
+SQL> SELECT Staff_Code s,Staff_Name d,DEPT_NAME d
+  2	FROM STAFF_MASTER S,BOOK_TRANSACTIONS D 
+  3	GROUP BY STAFF_NAME d 
+  4 	HAVING COUNT(STAFF_NAME d)>1;
+ 
+no rows selected
+SQL> SELECT S.STUDENT_CODE,S.STUDENT_NAME,D.DEPT_NAME 
+  2	FROM STAFF_MASTER S,DEPARTMENT_MASTER D 
+  3	GROUP BY S.DEPT_CODE 
+  4	HAVING MAX(S.DEPT_CODE);
+
+no rows selected
+ 
+SQL> SELECT S.Staff_Code,S.Staff_Name,D.DEPT_NAME,F.DESIGN_NAME 
+  2	FROM STAFF_MASTER S, DEPARTMENT_MASTER D,DESIGNATION_MASTER F 
+  3	WHERE MONTHS_BETWEEN(TO_CHAR(HIREDATE,'MM') ,TO_CHAR(SYSDATE,'MM'))<3;  
+ 
+no rows selected
+ 
+SQL>  SELECT DEPT_CODE,DEPT_NAME,COUNT(S.STAFF_NAME) AS NUMBEROFPEOPLE 
+  2	 FROM STAFF_MASTER S,DEPARTMENT_MASTER D 
+  3	 GROUP BY DEPT_CODE;
+
+no rows selected

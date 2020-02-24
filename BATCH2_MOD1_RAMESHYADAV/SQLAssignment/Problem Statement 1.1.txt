@@ -1,0 +1,1096 @@
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(5)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,3)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+
+
+
+SQL>  create table designation_master
+  2  (design_code number(3) not null,
+  3  design_name varchar2(50)
+  4  );
+
+Table created.
+
+SQL>  create table department_master
+  2  (dept_code number(2) not null,
+  3  dept_name varchar2(50)
+  4  );
+
+Table created.
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1   create table student_master
+  2  (student_code number(6) not null,
+  3  (student_name varchar2(50) ,
+  4  dept_code number(2),
+  5  student_dob date,
+  6  student_address varchar2(240)
+  7* );
+SQL>  create table student_master
+  2  (student_code number(6) not null,
+  3  (student_name varchar2(50) ,
+  4  dept_code number(2),
+  5  student_dob date,
+  6  student_address varchar2(240)
+  7  );
+(student_name varchar2(50) ,
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1   create table student_master
+  2  (student_code number(6) not null,
+  3  student_name varchar2(50) ,
+  4  dept_code number(2),
+  5  student_dob date,
+  6  student_address varchar2(240)
+  7* );
+SQL>  create table student_master
+  2  (student_code number(6) not null,
+  3  student_name varchar2(50) ,
+  4  dept_code number(2),
+  5  student_dob date,
+  6  student_address varchar2(240)
+  7  );
+
+Table created.
+
+
+SQL> create table student_marks
+  2  ( student_code number(6),
+  3  student_year number not null,
+  4  subject1 number(3),
+  5  subject2 number(3),
+  6  subject3 number(3)
+  7  );
+
+Table created.
+
+SQL> commit
+  2  ;
+
+Commit complete.
+
+SQL> create table staff_master
+  2  (staff_code number(8) not null,
+  3  staff_name varchar2(50) not null,
+  4  design_code number,
+  5  dept_code number,
+  6  hiredate date,
+  7  staff_dob date,
+  8  staff_address varchar2(240),
+  9  mgr_code number(8),
+ 10  staff_sal number(10,2)
+ 11  );
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table book_master
+  2  (book_code number(10) not null,
+  3  book_name varchar2(50) not null,
+  4  book_pub_year number,
+  5  book_pub_author varchar2(50) not null
+  6  );
+
+Table created.
+
+
+SQL> create table book_transactions
+  2  (book_code number,
+  3  student_code number,
+  4  staff_code number,
+  5  book_issue_date date not null,
+  6  book_expected_return_date date not null,
+  7  book_actual_return_date date not null
+  8  );
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+BOOK_MASTER
+TABLE
+
+BOOK_TRANSACTIONS
+TABLE
+
+DEPARTMENT_MASTER
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+DESIGNATION_MASTER
+TABLE
+
+EMP
+TABLE
+
+STAFF_MASTER
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+STUDENT_MARKS
+TABLE
+
+STUDENT_MASTER
+TABLE
+
+
+8 rows selected.
+
+
+SQL> insert into emp values(100,'ANIL','CEO',100,'01-JAN-90',9900.75,2000,01);
+
+1 row created.
+
+SQL> insert into emp values(101,'MUKESH','TESTER',100,'01-JAN-91',8900.75,2000,02);
+
+1 row created.
+
+SQL> insert into emp values(102,'RAMESH','TESTER',100,'01-JAN-93',9200.75,2000,02);
+
+1 row created.
+
+SQL> insert into emp values(103,'VAIBHAV','DEVELOPER',100,'01-JAN-99',9500.75,4000,03);
+
+1 row created.
+
+SQL> insert into emp values(104,'VISHAL','CLEANER',100,'01-JAN-91',500.75,4000,04);
+
+1 row created.
+
+SQL> insert into emp values(105,'SURYANSH','DEVELOPER',100,'01-JAN-98',9800.75,8000,03);
+
+1 row created.
+
+SQL> insert into designation_master values(001,'kyrie');
+
+1 row created.
+
+SQL> insert into designation_master values(002,'lebron');
+
+1 row created.
+
+SQL> insert into designation_master values(003,'soldier');
+
+1 row created.
+
+SQL> insert into designation_master values(004,'kobe');
+
+1 row created.
+
+SQL> insert into designation_master values(005,'dame');
+
+1 row created.
+
+SQL> insert into designation_master values(006,'freak 1');
+
+1 row created.
+
+SQL> insert into department_master values(01,'CEO');
+
+1 row created.
+
+SQL> insert into department_master values(02,'TESTER');
+
+1 row created.
+
+SQL> insert into department_master values(03,'DEVELOPER');
+
+1 row created.
+
+SQL> insert into department_master values(04,'CLEANER');
+
+1 row created.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+       105 SURYANSH   DEVELOPER        100 01-JAN-98    9800.75       8000
+         3
+
+
+6 rows selected.
+
+
+SQL> SELECT * FROM DESIGNATION_MASTER;
+
+DESIGN_CODE DESIGN_NAME
+----------- --------------------------------------------------
+          1 kyrie
+          2 lebron
+          3 soldier
+          4 kobe
+          5 dame
+          6 freak 1
+
+6 rows selected.
+
+
+SQL> CREATE TABLE DESIGNATION_MASTER
+  2  (DESIGN_CODE NUMBER(3) NOT NULL,
+  3  DESIGN_NAME VARCHAR2(50)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO DESIGNATION_MASTER VALUES(1,'CEO');
+
+1 row created.
+
+SQL> INSERT INTO DESIGNATION_MASTER VALUES(2,'TESTER');
+
+1 row created.
+
+SQL> INSERT INTO DESIGNATION_MASTER VALUES(3,'DEVELOPER');
+
+1 row created.
+
+SQL> INSERT INTO DESIGNATION_MASTER VALUES(4,'CLEANER');
+
+1 row created.
+
+SQL> SELECT*FROM EMP
+  2  ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+       105 SURYANSH   DEVELOPER        100 01-JAN-98    9800.75       8000
+         3
+
+
+6 rows selected.
+
+
+SQL> insert into emp values(105,'SURYANSH','DEVELOPER','','01-JAN-98',9800.75,8000,03);
+
+1 row created.
+
+SQL> SELECT*FROM EMP
+  2  ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+       105 SURYANSH   DEVELOPER        100 01-JAN-98    9800.75       8000
+         3
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       105 SURYANSH   DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+
+7 rows selected.
+
+SQL> DELETE FROM EMP WHERE MGR='';
+
+0 rows deleted.
+
+SQL> SELECT *FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+       105 SURYANSH   DEVELOPER        100 01-JAN-98    9800.75       8000
+         3
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       105 SURYANSH   DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+
+7 rows selected.
+
+SQL> DELETE FROM EMP WHERE MGR=NULL;
+
+0 rows deleted.
+
+SQL> DELETE FROM EMP WHERE MGR=100;
+
+6 rows deleted.
+
+SQL> SELECT*FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       105 SURYANSH   DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+
+SQL> insert into emp values(100,'ANIL','CEO',100,'01-JAN-90',9900.75,2000,01);
+
+1 row created.
+
+SQL>
+SQL> insert into emp values(101,'MUKESH','TESTER',100,'01-JAN-91',8900.75,2000,02);
+
+1 row created.
+
+
+SQL> insert into emp values(102,'RAMESH','TESTER',100,'01-JAN-93',9200.75,2000,02);
+
+1 row created.
+
+SQL>
+SQL> insert into emp values(103,'VAIBHAV','DEVELOPER',100,'01-JAN-99',9500.75,4000,03);
+
+1 row created.
+
+SQL>
+SQL> insert into emp values(104,'VISHAL','CLEANER',100,'01-JAN-91',500.75,4000,04);
+
+1 row created.
+
+SQL>
+SQL> insert into emp values(106,'MIHIR','DEVELOPER','','01-JAN-98',9800.75,8000,03);
+
+1 row created.
+
+SQL> SELECT*FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       105 SURYANSH   DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       106 MIHIR      DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+
+7 rows selected.
+
+SQL> SELECT ENAME,DESIGN_CODE FROM EMP E ,DESIGNATION_MASTER D
+  2  WHERE
+  3  HIREDATE<'1-JAN-2003' AND SAL BETWEEN 2000 AND 5000
+  4  ;
+
+no rows selected
+
+SQL> SELECT ENAME,DESIGN_CODE FROM EMP E ,DESIGNATION_MASTER D
+  2  WHERE
+  3  E.HIREDATE<'1-JAN-2003' AND SAL BETWEEN 2000 AND 5000
+  4  ;
+
+no rows selected
+
+SQL>
+SQL> SELECT*FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       105 SURYANSH   DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+       100 ANIL       CEO              100 01-JAN-90    9900.75       2000
+         1
+
+       101 MUKESH     TESTER           100 01-JAN-91    8900.75       2000
+         2
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       102 RAMESH     TESTER           100 01-JAN-93    9200.75       2000
+         2
+
+       103 VAIBHAV    DEVELOPER        100 01-JAN-99    9500.75       4000
+         3
+
+       104 VISHAL     CLEANER          100 01-JAN-91     500.75       4000
+         4
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       106 MIHIR      DEVELOPER            01-JAN-98    9800.75       8000
+         3
+
+
+7 rows selected.
+
+SQL> SELECT*FROM DESIGNATION_MASTER;
+
+DESIGN_CODE DESIGN_NAME
+----------- --------------------------------------------------
+          1 CEO
+          2 TESTER
+          3 DEVELOPER
+          4 CLEANER
+
+SQL> SELECT EMPNO,ENAME,DESIGN_CODE FROM EMP E,DESIGNATION_MASTER D
+  2  WHERE
+  3  HIREDATE<'31-DEC-99' AND SAL BETWEEN 2000 AND 5000
+  4  ;
+
+no rows selected
+
+
+SQL> SELECT EMPNO,ENAME,DESIGN_CODE FROM EMP E,DESIGNATION_MASTER D
+  2  WHERE
+  3  HIREDATE<'31-DEC-99'
+  4  ;
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       105 SURYANSH             1
+       100 ANIL                 1
+       101 MUKESH               1
+       102 RAMESH               1
+       103 VAIBHAV              1
+       104 VISHAL               1
+       106 MIHIR                1
+       105 SURYANSH             2
+       100 ANIL                 2
+       101 MUKESH               2
+       102 RAMESH               2
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       103 VAIBHAV              2
+       104 VISHAL               2
+       106 MIHIR                2
+       105 SURYANSH             3
+       100 ANIL                 3
+       101 MUKESH               3
+       102 RAMESH               3
+       103 VAIBHAV              3
+       104 VISHAL               3
+       106 MIHIR                3
+       105 SURYANSH             4
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       100 ANIL                 4
+       101 MUKESH               4
+       102 RAMESH               4
+       103 VAIBHAV              4
+       104 VISHAL               4
+       106 MIHIR                4
+
+28 rows selected.
+>
+SQL> SELECT DISTINCT EMPNO,ENAME,DESIGN_CODE FROM EMP E,DESIGNATION_MASTER D
+  2  WHERE
+  3  HIREDATE<'31-DEC-99'
+  4  ;
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       105 SURYANSH             1
+       101 MUKESH               2
+       102 RAMESH               2
+       101 MUKESH               3
+       104 VISHAL               3
+       105 SURYANSH             2
+       106 MIHIR                3
+       101 MUKESH               4
+       102 RAMESH               1
+       100 ANIL                 2
+       103 VAIBHAV              2
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       105 SURYANSH             3
+       103 VAIBHAV              3
+       103 VAIBHAV              4
+       104 VISHAL               1
+       106 MIHIR                1
+       102 RAMESH               4
+       104 VISHAL               4
+       101 MUKESH               1
+       103 VAIBHAV              1
+       102 RAMESH               3
+       105 SURYANSH             4
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       104 VISHAL               2
+       106 MIHIR                2
+       100 ANIL                 3
+       100 ANIL                 4
+       100 ANIL                 1
+       106 MIHIR                4
+
+28 rows selected.
+
+
+SQL> SELECT DISTINCT EMPNO,ENAME,DESIGN_CODE FROM EMP E,DESIGNATION_MASTER D
+  2  WHERE
+  3  E.DEPTNO=DESIGN_CODE
+  4  AND
+  5  HIREDATE<'31-DEC-99'
+  6  ;
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       101 MUKESH               2
+       102 RAMESH               2
+       106 MIHIR                3
+       105 SURYANSH             3
+       103 VAIBHAV              3
+       104 VISHAL               4
+       100 ANIL                 1
+
+7 rows selected.
+
+SQL> /
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       101 MUKESH               2
+       102 RAMESH               2
+       106 MIHIR                3
+       105 SURYANSH             3
+       103 VAIBHAV              3
+       104 VISHAL               4
+       100 ANIL                 1
+
+7 rows selected.
+
+SQL> SELECT DISTINCT EMPNO,ENAME,DESIGN_CODE FROM EMP E,DESIGNATION_MASTER D
+  2  WHERE
+  3  E.DEPTNO=DESIGN_CODE
+  4  AND
+  5  HIREDATE<'31-DEC-99'
+  6  AND SAL BETWEEN 500 AND 9000
+  7  ;
+
+     EMPNO ENAME      DESIGN_CODE
+---------- ---------- -----------
+       101 MUKESH               2
+       104 VISHAL               4
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DESC EMP
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(5)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,3)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> SELECT*FROM STAFF_MASTER
+  2  ;
+
+no rows selected
+
+SQL> DESC STAFF_MASTER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFF_CODE                                NOT NULL NUMBER(8)
+ STAFF_NAME                                NOT NULL VARCHAR2(50)
+ DESIGN_CODE                                        NUMBER
+ DEPT_CODE                                          NUMBER
+ HIREDATE                                           DATE
+ STAFF_DOB                                          DATE
+ STAFF_ADDRESS                                      VARCHAR2(240)
+ MGR_CODE                                           NUMBER(8)
+ STAFF_SAL                                          NUMBER(10,2)
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1101,'SUPPORT',1,1,'1-JAN-2000','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1102,'SUPPORT',1,1,'1-JAN-2001','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1103,'SUPPORT',1,1,'1-JAN-1999','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1104,'SUPPORT',1,1,'1-JAN-1988','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> SELECT*FROM STAFF_MASTER;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1101 SUPPORT                                                      1
+         1 01-JAN-00 01-JAN-88
+GHAZIABAD
+                50000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1102 SUPPORT                                                      1
+         1 01-JAN-01 01-JAN-88
+GHAZIABAD
+                50000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1103 SUPPORT                                                      1
+         1 01-JAN-99 01-JAN-88
+GHAZIABAD
+                50000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+      1104 SUPPORT                                                      1
+         1 01-JAN-88 01-JAN-88
+GHAZIABAD
+                50000
+
+
+SQL> DESC STAFF_MASTER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFF_CODE                                NOT NULL NUMBER(8)
+ STAFF_NAME                                NOT NULL VARCHAR2(50)
+ DESIGN_CODE                                        NUMBER
+ DEPT_CODE                                          NUMBER
+ HIREDATE                                           DATE
+ STAFF_DOB                                          DATE
+ STAFF_ADDRESS                                      VARCHAR2(240)
+ MGR_CODE                                           NUMBER(8)
+ STAFF_SAL                                          NUMBER(10,2)
+
+SQL> SELECT STAFF_NAME,STAFF_NAME,DEPT_CODE FROM STAFF_MASTER
+  2  WHERE
+  3  HIREDATE
+  4
+SQL> INSERT INTO STAFF_MASTER VALUES(1105,'SUPPORT',1,1,'1-JAN-2010','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1106,'SUPPORT',1,1,'1-JAN-2015','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> INSERT INTO STAFF_MASTER VALUES(1107,'SUPPORT',1,1,'1-JAN-2018','1-JAN-1988','GHAZIABAD','',50000);
+
+1 row created.
+
+SQL> SELECT STAFF_NAME,STAFF_NAME,DEPT_CODE FROM STAFF_MASTER
+  2  WHERE
+  3  HIREDATE<'31-DEC-2003'
+  4  ;
+
+STAFF_NAME
+--------------------------------------------------
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+SUPPORT
+SUPPORT                                                     1
+
+SUPPORT
+SUPPORT                                                     1
+
+SUPPORT
+SUPPORT                                                     1
+
+
+STAFF_NAME
+--------------------------------------------------
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+SUPPORT
+SUPPORT                                                     1
+
+
+SQL> SELECT STAFF_NAME,STAFF_NAME,DEPT_CODE FROM STAFF_MASTER
+  2  WHERE
+  3  HIREDATE<'31-DEC-2003' ORDER BY HIREDATE
+  4  ;
+
+STAFF_NAME
+--------------------------------------------------
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+SUPPORT
+SUPPORT                                                     1
+
+SUPPORT
+SUPPORT                                                     1
+
+SUPPORT
+SUPPORT                                                     1
+
+
+STAFF_NAME
+--------------------------------------------------
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+SUPPORT
+SUPPORT                                                     1
+
+
+SQL> DESC BOOK_MASTER
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOK_CODE                                 NOT NULL NUMBER(10)
+ BOOK_NAME                                 NOT NULL VARCHAR2(50)
+ BOOK_PUB_YEAR                                      NUMBER
+ BOOK_PUB_AUTHOR                           NOT NULL VARCHAR2(50)
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1001,'JAVA',2000,'XYZ');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1002,'C',2002,'ABC');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(10010,'CODING',2002,'A')
+  2
+SQL>
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1003,'COMIC',2001,'AB')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1004,'COMPUTER',2004,'AC')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1005,'HINDI',2005,'A')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1006,'SPORTS',2007,'B')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1007,'ART',2000,'C')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1008,'COMEDY',2003,'BC')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1009,'C',2002,'CB')
+  2  ;
+
+1 row created.
+
+
+SQL> SELECT*FROM BOOK_MASTER
+  2  ;
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1001 JAVA                                                        2000
+XYZ
+
+      1002 C                                                           2002
+ABC
+
+      1009 C                                                           2002
+CB
+
+
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(10010,'CODING',2002,'A')
+  2
+SQL>
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1003,'COMIC',2001,'AB')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1004,'COMPUTER',2004,'AC')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1005,'HINDI',2005,'A')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1006,'SPORTS',2007,'B')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1007,'ART',2000,'C')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1008,'COMEDY',2003,'BC')
+  2
+SQL>
+SQL> INSERT INTO BOOK_MASTER VALUES(1009,'C',2002,'CB')
+  2  ;
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(10010,'CODING',2002,'A');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1003,'COMIC',2001,'AB');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1004,'COMPUTER',2004,'AC');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1005,'HINDI',2005,'A');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1006,'SPORTS',2007,'B');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1007,'ART',2000,'C');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1008,'COMEDY',2003,'BC');
+
+1 row created.
+
+SQL> INSERT INTO BOOK_MASTER VALUES(1009,'C',2002,'CB');
+
+1 row created.
+
+SQL> SELECT*FROM BOOK_MASTER
+  2  WHERE BOOK_PUB_YEAR BETWEEN 2000 AND 2004
+  3  ;
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1001 JAVA                                                        2000
+XYZ
+
+      1002 C                                                           2002
+ABC
+
+      1009 C                                                           2002
+CB
+
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1009 C                                                           2002
+CB
+
+     10010 CODING                                                      2002
+A
+
+      1003 COMIC                                                       2001
+AB
+
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1004 COMPUTER                                                    2004
+AC
+
+      1007 ART                                                         2000
+C
+
+      1008 COMEDY                                                      2003
+BC
+
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1009 C                                                           2002
+CB
+
+
+10 rows selected.
+
+SQL> COMMIT
+  2  ;
+
+Commit complete.
